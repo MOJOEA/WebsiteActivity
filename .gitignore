@@ -1,0 +1,28 @@
+# =====================
+# Environment / Secret
+# =====================
+.env
+.env.*
+config/database.php
+config/*.local.php
+
+# =====================
+# Dependencies
+# =====================
+/vendor/
+/node_modules/
+
+# =====================
+# Logs & Cache
+# =====================
+*.log
+/tmp/
+/cache/
+
+# =====================
+# OS / Editor
+# =====================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
