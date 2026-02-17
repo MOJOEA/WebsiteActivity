@@ -22,6 +22,7 @@ const PUBLIC_ROUTES = [
     '/',
     '/login',
     '/register',
+    '/contact',
 ];
 
 $uri = strtolower($_SERVER['REQUEST_URI']);

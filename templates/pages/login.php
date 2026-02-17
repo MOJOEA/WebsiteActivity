@@ -3,45 +3,38 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>เข้าสู่ระบบ</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100 text-gray-800">
     <?php include __DIR__ . '/../partials/header.php'; ?>
 
-    <main class="min-h-[60vh] flex items-center justify-center px-6 mt-10 mb-10">
-        <div class="bg-white rounded-2xl shadow-lg p-10 w-full max-w-md">
-            <h1 class="text-3xl font-bold text-center mb-6">เข้าสู่ระบบ</h1>
-
-            <?php if (!empty($data['error'])): ?>
-                <div class="mb-4 rounded-lg bg-red-100 px-4 py-2 text-red-700 text-sm">
-                    <?= htmlspecialchars($data['error']) ?>
+    <main class="bg-gray-100 flex items-center justify-center mb-12">
+        <div class="bg-white w-full max-w-md rounded-xl shadow-[0_0_20px_5px_rgba(0,0,0,0.1)] p-8 mt-12">
+            <div class="text-center mb-6">
+                <div class="mx-auto w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
+                    ➜
                 </div>
-            <?php endif; ?>
+                <h1 class="text-2xl font-bold mt-4">เข้าสู่ระบบ</h1>
+                <p class="text-gray-500">ยินดีต้อนรับกลับ!</p>
+            </div>
 
-            <form method="POST" class="space-y-5">
-                <div>
-                    <label class="block text-sm font-medium mb-1">อีเมล</label>
-                    <input type="email" name="email" required
-                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500">
-                </div>
+            <form class="space-y-4" action="/login" method="POST">
+                <input type="email" name="email" placeholder="email@example.com"
+                    class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-                <div>
-                    <label class="block text-sm font-medium mb-1">รหัสผ่าน</label>
-                    <input type="password" name="password" required
-                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500">
-                </div>
+                <input type="password" name="password" placeholder="รหัสผ่าน"
+                    class="w-full border rounded-lg px-4 py-3">
 
-                <button type="submit"
-                    class="w-full rounded-lg bg-blue-600 py-2 text-white font-semibold hover:bg-blue-700 transition">
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
                     เข้าสู่ระบบ
                 </button>
             </form>
 
-            <p class="text-center text-sm text-gray-600 mt-6">
+            <p class="text-center text-sm mt-4">
                 ยังไม่มีบัญชี?
-                <a href="/register" class="text-blue-600 hover:underline">สมัครสมาชิก</a>
+                <a href="register.php" class="text-blue-600">สมัครสมาชิก</a>
             </p>
         </div>
     </main>

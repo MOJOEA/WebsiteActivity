@@ -1,7 +1,7 @@
 <?php
 
 $hostname = '127.0.0.1';
-$dbName   = 'webenroll';
+$dbName   = 'activityDB';
 $username = 'root';
 $password = '';
 

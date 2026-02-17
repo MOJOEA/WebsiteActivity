@@ -1,30 +1,14 @@
 <?php
 // ฟังก์ชันสำหรับดึงข้อมูลนักเรียนจากฐานข้อมูล
 
-function SearchEmail(string $email): mysqli_result|bool {
+function register(string $name, string $email, string $date_of_birth, string $password, string $image = null): bool {
     global $conn;
-    $sql = "SELECT * FROM students WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('s', $email);
-    $result = $stmt->execute();
-    if ($result) {
-        $result = $stmt->get_result();
-        if ($result && $result->num_rows > 0) {
-            return $result;
-        }
-    }
-    $stmt->close();
-    return false;
-}
-
-function register($first_name, $last_name, $phone_number, $date_of_birth, $password, $image, $email): bool {
-    global $conn;
-    $sql = 'INSERT INTO students 
-    (first_name, last_name, phone_number, date_of_birth, password, image, email) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)';
+    $sql = 'INSERT INTO users
+    (name, email, birth_date, password, image, created_at) 
+    VALUES (?, ?, ?, ?, ?, NOW())';
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sssssss', $first_name, $last_name, $phone_number, $date_of_birth, $password, $image, $email);
+    $stmt->bind_param('sssss', $name, $email, $date_of_birth, $password, $image);
     $result = $stmt->execute();
     $stmt->close();
 
@@ -32,12 +16,18 @@ function register($first_name, $last_name, $phone_number, $date_of_birth, $passw
 }
 
 
-function login($email): mysqli_result|bool {
+function login($email) {
     global $conn;
-    $sql = "SELECT * FROM students WHERE email = '$email'";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows > 0) {
-        return $result;
-    }   
-    return false;
+
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+
+    return $user;
 }
+

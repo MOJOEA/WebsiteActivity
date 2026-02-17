@@ -18,25 +18,27 @@ function post(): void{
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     
-    if(SearchEmail($email) === false){
+    if(empty($email) || empty($password)) {
+        renderView('login', ['title' => 'Login Page','error' => 'กรุณากรอกอีเมลและรหัสผ่าน']);
+        return;
+    }
+
+    if(login($email) === false){
         renderView('login', ['title' => 'Login Page','error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง']);
         return;
     }
     $result = login($email);
-    
-    if ($result && $result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-        if (password_verify($password, $user['PASSWORD'])) {
+    if ($result && $result['email'] === $email) {
+        if (password_verify($password, $result['PASSWORD'])) {
             // การเข้าสู่ระบบสำเร็จ
             $_SESSION['user'] = [
-                'student_id' => $user['student_id'],
-                'first_name' => $user['first_name'],
-                'last_name'  => $user['last_name'],
-                'email'      => $user['email']
+                'user_id' => $result['user_id'],
+                'name' => $result['name'],
+                'email' => $result['email']
             ];
             $unix_timestamp = time();
             $_SESSION['timestamp'] = $unix_timestamp;
-            header('Location: /students');
+            header('Location: /activities');
             exit();
         }else {
             // รหัสผ่านไม่ถูกต้อง

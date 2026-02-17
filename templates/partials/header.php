@@ -21,12 +21,6 @@
                 <a href="/contact" class="hover:text-blue-600 transition">ติดต่อเรา</a>
             </li>
             <li>
-                <a href="/students" class="hover:text-blue-600 transition">ข้อมูลนักเรียน</a>
-            </li>
-            <li>
-                <a href="/course" class="hover:text-blue-600 transition">ข้อมูลรายวิชา</a>
-            </li>
-            <li>
                 <a href="/login" class="hover:text-blue-600 transition">เข้าสู่ระบบ</a>
             </li>
             <li>
@@ -36,13 +30,10 @@
                 <a href="/logout" class="hover:text-blue-600 transition">ออกจากระบบ</a>
             </li>
             <li>
-                <a href="/enroll" class="hover:text-blue-600 transition">ลงทะเบียนรายวิชา</a>
-            </li>
-            <li>
                 <a href="/edit_profile" class="hover:text-blue-600 transition">แก้ไขโปรไฟล์</a>
             </li>   
             <li>
-                <a href="/students_courses" class="hover:text-blue-600 transition">วิชาที่ลงทะเบียน</a>
+                <a href="/activities" class="hover:text-blue-600 transition">กิจกรรม</a>
             </li>
         </ul>
     </div>
