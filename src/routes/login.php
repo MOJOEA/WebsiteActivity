@@ -33,7 +33,7 @@ function post(): void{
             // การเข้าสู่ระบบสำเร็จ
             $_SESSION['user'] = [
                 'user_id' => $result['user_id'],
-                'name' => $result['name'],
+                'name' => $result['NAME'],
                 'email' => $result['email']
             ];
             $unix_timestamp = time();

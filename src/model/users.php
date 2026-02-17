@@ -1,7 +1,7 @@
 <?php
 // ฟังก์ชันสำหรับดึงข้อมูลนักเรียนจากฐานข้อมูล
 
-function register(string $name, string $email, string $date_of_birth, string $password, string $image = null): bool {
+function register(string $name, string $email, string $date_of_birth, string $password, string $image): bool {
     global $conn;
     $sql = 'INSERT INTO users
     (name, email, birth_date, password, image, created_at) 
