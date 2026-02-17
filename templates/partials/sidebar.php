@@ -1,4 +1,4 @@
-<aside class="w-64 bg-white h-auto border-r p-4 relative">
+<aside class="w-64 bg-white h-[100vh] border-r p-4 relative">
   <h2 class="text-xl font-bold mb-6">กิจกรรม</h2>
 
   <!-- ปุ่มสร้าง -->
@@ -8,10 +8,10 @@
     + สร้างกิจกรรม
   </button>
 
-  <nav class="space-y-2">
-    <li><a href="/" class="block p-2 rounded bg-gray-200 text-blue-600">ค้นหา</a></li>
-    <li><a href="/" class="block p-2 rounded bg-blue-50 text-blue-600">กิจกรรมของฉัน</a></li>
-    <li><a href="/" class="block p-2 rounded bg-blue-50 text-blue-600">แดชบอร์ด</a></li>
+  <nav class="space-y-2 ">
+    <li><a href="/activities" class="block p-2 rounded bg-gray-200 text-blue-600">ค้นหา</a></li>
+    <li><a href="/my-activities" class="block p-2 rounded bg-blue-50 text-blue-600">กิจกรรมของฉัน</a></li>
+    <li><a href="/dashboard" class="block p-2 rounded bg-blue-50 text-blue-600">แดชบอร์ด</a></li>
   </nav>
 
   <div class="absolute bottom-4 left-4 text-sm mb-12">

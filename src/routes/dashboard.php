@@ -9,13 +9,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 }
 // ประมวลผลก่อนแสดงผลหน้า
-function get(): void
-{
-    $keyword = $_GET['keyword'] ?? null;
-    $start_date = $_GET['start_date'] ?? null;
-    
-    $events = getevents($keyword, $start_date);
-    renderView('activities', ['title' => 'my-activities Page', 'events' => $events ]);
+function get(): void{
+        renderView('dashboard', ['title' => 'dashboard Page']);
 }
 
-function post(): void {}
+function post(): void{
+    
+}

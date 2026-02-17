@@ -12,7 +12,7 @@
     <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 
     <main class="flex-1 p-8">
-        <h1 class="text-2xl font-bold mb-6">กิจกรรมทั้งหมด</h1>
+        <h1 class="text-2xl font-bold mb-6">กิจกรรมทั้งหมดของฉัน</h1>
 
         <!-- 🔍 Search Filter -->
         <form action="/activities" method="GET" class="bg-white p-6 rounded-xl shadow mb-8 ">
@@ -45,14 +45,25 @@
                         name="start_date"
                         class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 </div>
+
+                <!-- วันสิ้นสุด -->
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-gray-500">วันสิ้นสุด</label>
+                    <input
+                        type="date"
+                        name="end_date"
+                        class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
             </div>
         </form>
 
         <!-- 📦 Activity Grid -->
         <div class="grid grid-cols-3 gap-5">
+
             <?php foreach ($data['events'] as $event): ?>
                 <div
-                    onclick="openViewModal(
+                    onclick="event.stopPropagation(); openEditModal(
                     '<?= htmlspecialchars($event['title'], ENT_QUOTES) ?>',
                     '<?= htmlspecialchars($event['event_date'], ENT_QUOTES) ?>',
                     '<?= htmlspecialchars($event['location'], ENT_QUOTES) ?>',
@@ -79,12 +90,11 @@
                 </div>
             <?php endforeach; ?>
         </div>
-
     </main>
 
     <!-- include modal -->
     <?php include __DIR__ . '../view/create-modal.php'; ?>
-    <?php include __DIR__ . '../view/view-modal.php'; ?>
+    <?php include __DIR__ . '../view/edit-modal.php'; ?>
 </body>
 
 </html>

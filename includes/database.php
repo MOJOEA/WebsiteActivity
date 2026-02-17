@@ -19,3 +19,4 @@ function getConnection(): mysqli
 }
 // โหลดโมเดลที่ต้องการใช้
 require_once MODEL_DIR . '/users.php';
+require_once MODEL_DIR . '/events.php';

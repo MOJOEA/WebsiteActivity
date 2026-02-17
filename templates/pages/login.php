@@ -27,6 +27,12 @@
                 <input type="password" name="password" placeholder="รหัสผ่าน"
                     class="w-full border rounded-lg px-4 py-3">
 
+                <?php if (!empty($data['error'])): ?>
+                    <div class="mb-4 rounded-lg bg-red-100 px-4 py-2 text-red-700 text-sm text-center">
+                        <?= htmlspecialchars($data['error']) ?>
+                    </div>
+                <?php endif; ?>
+                
                 <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
                     เข้าสู่ระบบ
                 </button>

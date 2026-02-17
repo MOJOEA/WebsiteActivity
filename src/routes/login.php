@@ -32,7 +32,7 @@ function post(): void{
         if (password_verify($password, $result['PASSWORD'])) {
             // การเข้าสู่ระบบสำเร็จ
             $_SESSION['user'] = [
-                'user_id' => $result['user_id'],
+                'user_id' => $result['id'],
                 'name' => $result['NAME'],
                 'email' => $result['email']
             ];

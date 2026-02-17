@@ -13,9 +13,15 @@ function get(): void
 {
     $keyword = $_GET['keyword'] ?? null;
     $start_date = $_GET['start_date'] ?? null;
-    
-    $events = getevents($keyword, $start_date);
-    renderView('activities', ['title' => 'my-activities Page', 'events' => $events ]);
+    $user_id = $_SESSION['user']['user_id'] ?? null;
+
+    if (!$user_id) {
+        header("Location: /login");
+        exit;
+    }
+
+    $events = geteventsBYid($user_id, $keyword, $start_date);
+    renderView('my-activities', ['title' => 'my-activities Page', 'events' => $events]);
 }
 
 function post(): void {}
