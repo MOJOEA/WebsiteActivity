@@ -30,7 +30,7 @@
                     <input type="email" name="email" required
                         class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200">
                 </div>
-                
+
                 <!-- Date of Birth -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700">วันเกิด</label>
@@ -66,20 +66,10 @@
 
                 <!-- Image Upload -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">รูปโปรไฟล์</label>
-
-                    <label
-                        class="flex flex-col items-center justify-center w-full h-20 px-4 border-2 border-dashed rounded-xl cursor-pointer
-                            bg-gray-50 hover:bg-gray-100 border-gray-300 text-gray-500 transition">
-
-                        <p class="text-sm">
-                            <span class="font-semibold text-blue-600">คลิกเพื่ออัปโหลด</span>
-                            หรือ ลากไฟล์มาวาง
-                        </p>
-                        <p class="text-xs text-gray-400 mt-1">PNG, JPG (ไม่เกิน 2MB)</p>
-
-                        <input type="file" name="image" accept="image/*" class="hidden">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        รูปโปรไฟล์
                     </label>
+                    <input type="file" name="image" accept="image/*">
                 </div>
 
                 <?php if (!empty($data['error'])): ?>

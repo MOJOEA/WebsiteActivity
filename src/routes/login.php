@@ -10,21 +10,23 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 }
 
-function get(): void{
-        renderView('login', ['title' => 'Login Page']);
+function get(): void
+{
+    renderView('login', ['title' => 'Login Page']);
 }
 
-function post(): void{
+function post(): void
+{
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
-    
-    if(empty($email) || empty($password)) {
-        renderView('login', ['title' => 'Login Page','error' => 'กรุณากรอกอีเมลและรหัสผ่าน']);
+
+    if (empty($email) || empty($password)) {
+        renderView('login', ['title' => 'Login Page', 'error' => 'กรุณากรอกอีเมลและรหัสผ่าน']);
         return;
     }
 
-    if(login($email) === false){
-        renderView('login', ['title' => 'Login Page','error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง']);
+    if (login($email) === false) {
+        renderView('login', ['title' => 'Login Page', 'error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง']);
         return;
     }
     $result = login($email);
@@ -38,11 +40,11 @@ function post(): void{
             ];
             $unix_timestamp = time();
             $_SESSION['timestamp'] = $unix_timestamp;
-            header('Location: /activities');
+            header('Location: /Event');
             exit();
-        }else {
+        } else {
             // รหัสผ่านไม่ถูกต้อง
-            renderView('login', ['title' => 'Login Page','error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง']);
+            renderView('login', ['title' => 'Login Page', 'error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง3']);
             return;
         }
     }

@@ -2,13 +2,10 @@
 <div id="createModal"
   class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
 
-  <div class="bg-white w-full max-w-lg rounded-xl p-6 relative"
+  <div class="bg-white w-full max-w-lg rounded-xl p-6 relative overflow-y-auto h-[95%]"
     onclick="event.stopPropagation()">
 
-    <button onclick="closeModal()"
-      class="absolute right-4 top-4 text-gray-500">
-      ✕
-    </button>
+    <button onclick="closeModal()" class="absolute right-4 top-4 text-gray-500"> ✕ </button>
 
     <h2 class="text-xl font-bold mb-4">สร้างกิจกรรมใหม่</h2>
 
@@ -17,8 +14,12 @@
       <input placeholder="ชื่อกิจกรรม" name="name"
         class="w-full border rounded-lg px-3 py-2">
 
-      <label class="text-sm text-gray-500 ml-1">วัน/เวลา</label>
-      <input type="datetime-local" name="date"
+      <label class="text-sm text-gray-500 ml-1">วัน/เวลา เริ่ม</label>
+      <input type="datetime-local" name="start_date"
+        class="w-full border rounded-lg px-3 py-2">
+
+      <label class="text-sm text-gray-500 ml-1">วัน/เวลา สิ้นสุด</label>
+      <input type="datetime-local" name="end_date"
         class="w-full border rounded-lg px-3 py-2">
 
       <label class="text-sm text-gray-500 ml-1">สถานที่</label>

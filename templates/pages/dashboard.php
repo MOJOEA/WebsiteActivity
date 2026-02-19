@@ -20,23 +20,23 @@
         <div class="grid grid-cols-4 gap-6">
 
             <div class="bg-white p-6 rounded-xl shadow">
-                <p class="text-gray-500 text-sm">กิจกรรมทั้งหมด</p>
-                <h2 class="text-3xl font-bold mt-2">24</h2>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow">
                 <p class="text-gray-500 text-sm">ผู้เข้าร่วมทั้งหมด</p>
-                <h2 class="text-3xl font-bold mt-2">320</h2>
+                <h2 class="text-3xl font-bold mt-2"><?= $data['Conut']['users'] ?></h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow">
-                <p class="text-gray-500 text-sm">กิจกรรมที่กำลังจะมา</p>
-                <h2 class="text-3xl font-bold mt-2">5</h2>
+                <p class="text-gray-500 text-sm">ยังไม่อนุมัติ</p>
+                <h2 class="text-3xl font-bold mt-2"><?= $data['Conut']['pending_status'] ?></h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow">
-                <p class="text-gray-500 text-sm">กิจกรรมที่สิ้นสุดแล้ว</p>
-                <h2 class="text-3xl font-bold mt-2">19</h2>
+                <p class="text-gray-500 text-sm">อนุมัติแล้ว</p>
+                <h2 class="text-3xl font-bold mt-2"><?= $data['Conut']['yes_status'] ?></h2>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow">
+                <p class="text-gray-500 text-sm">เช็คอิน</p>
+                <h2 class="text-3xl font-bold mt-2"><?= $data['Conut']['checkin'] ?></h2>
             </div>
 
         </div>
@@ -46,7 +46,7 @@
 
             <!-- Bar Chart -->
             <div class="bg-white p-6 rounded-xl shadow h-[300px]">
-                <h2 class="font-bold mb-4">จำนวนผู้เข้าร่วมรายเดือน</h2>
+                <h2 class="font-bold mb-4">อายุของผู้เข้าร่วม</h2>
                 <canvas id="barChart"></canvas>
             </div>
 
@@ -58,109 +58,125 @@
 
         </div>
 
-        <!-- 📅 Upcoming Activities -->
-        <div class="bg-white p-6 rounded-xl shadow ">
-            <h2 class="font-bold text-lg mb-4">กิจกรรมที่กำลังจะมาถึง</h2>
-
-            <div class="space-y-4">
-                <?php for ($i = 0; $i < 3; $i++): ?>
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <div>
-                            <p class="font-medium">ชื่อกิจกรรม</p>
-                            <p class="text-sm text-gray-500">6 ก.พ. 2569 • กาฬสินธุ์</p>
-                        </div>
-                        <span class="text-blue-600 font-medium">ดูรายละเอียด</span>
-                    </div>
-                <?php endfor; ?>
-            </div>
-        </div>
-
         <!-- 📊 Recent Activities Table -->
-        <div class="bg-white p-6 rounded-xl shadow">
-            <h2 class="font-bold text-lg mb-4">กิจกรรมล่าสุด</h2>
+        <div class="overflow-x-auto shadow-[0_0_20px_5px_rgba(0,0,0,0.1)]">
+            <table class="w-full text-left">
+                <thead class="bg-gray-50 text-sm text-gray-600">
+                    <tr>
+                        <th class="p-3">ผู้เข้าร่วม</th>
+                        <th class="p-3">วันที่สมัคร</th>
+                        <th class="p-3">อายุ / เพศ</th>
+                        <th class="p-3">เช็คอิน</th>
+                        <th class="p-3">สถานะ</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm">
+                    <?php foreach ($data['users'] as $user): ?>
+                        <tr class="border-b">
+                            <td class="p-3"><?= htmlspecialchars($user['name']) ?></td>
 
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead class="bg-gray-50 text-sm text-gray-600">
-                        <tr>
-                            <th class="p-3">ชื่อกิจกรรม</th>
-                            <th class="p-3">วันที่</th>
-                            <th class="p-3">สถานที่</th>
-                            <th class="p-3">ผู้เข้าร่วม</th>
-                            <th class="p-3">สถานะ</th>
+                            <td class="p-3"> <?= date('d/m/Y H:i', strtotime($user['registered_at'])) ?></td>
+
+                            <td class="p-3"><?= $user['age'] ?> ปี / <?= $user['gender'] ?></td>
+
+                            <td class="p-3"><?= $user['checked_in'] ? 'เช็คอินแล้ว' : 'ยังไม่เช็คอิน' ?></td>
+
+                            <td class="p-3">
+                                <form method="POST" action="/api/status">
+                                    <input type="hidden"name="user_id"value="<?= htmlspecialchars($user['user_id'] ?? '') ?>">
+                                    <input type="hidden"name="event_id"value="<?= htmlspecialchars($user['event_id'] ?? '') ?>">
+
+                                    <?php if (($user['status'] ?? '') === 'pending'): ?>
+                                        <button type="submit"
+                                            class="px-3 py-1 text-xs bg-green-100 text-green-600 rounded-full">
+                                            อนุญาต
+                                        </button>
+                                    <?php else: ?>
+                                        <button type="submit"
+                                            class="px-3 py-1 text-xs bg-red-100 text-red-600 rounded-full">
+                                            ยกเลิก
+                                        </button>
+                                    <?php endif; ?>
+                                </form>
+                            </td>
+
                         </tr>
-                    </thead>
-                    <tbody class="text-sm">
-                        <?php for ($i = 0; $i < 5; $i++): ?>
-                            <tr class="border-b">
-                                <td class="p-3">ชื่อกิจกรรม</td>
-                                <td class="p-3">6 ก.พ. 2569</td>
-                                <td class="p-3">กาฬสินธุ์</td>
-                                <td class="p-3">50 คน</td>
-                                <td class="p-3">
-                                    <span class="px-3 py-1 text-xs bg-green-100 text-green-600 rounded-full">
-                                        เปิดรับสมัคร
-                                    </span>
-                                </td>
-                            </tr>
-                        <?php endfor; ?>
-                    </tbody>
-                </table>
-            </div>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
+
 
     </main>
-
     <script>
         // 📊 Bar Chart
         const barCtx = document.getElementById('barChart');
 
-        new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.'],
-                datasets: [{
-                    label: 'จำนวนผู้เข้าร่วม',
-                    data: [30, 45, 60, 50, 70, 65],
-                    backgroundColor: '#3b82f6'
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
+        if (barCtx) {
+            new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['0-17', '18-15', '26-35', '36-45', '46+'],
+                    datasets: [{
+                        label: 'ช่วงอายุผู้เข้าร่วม',
+                        data: <?= json_encode(array_column($data['data_age'], 'total')) ?>,
+                        backgroundColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+        <?php
+        $genderData = $data['data_gender'] ?? [];
+
+        $male = $genderData['male'] ?? 0;
+        $female = $genderData['female'] ?? 0;
+        $other = $genderData['other'] ?? 0;
+        ?>
 
         // 🥧 Pie Chart
         const pieCtx = document.getElementById('pieChart');
 
-        new Chart(pieCtx, {
-            type: 'pie',
-            data: {
-                labels: ['เปิดรับสมัคร', 'ใกล้เต็ม', 'ปิดรับสมัคร'],
-                datasets: [{
-                    data: [12, 5, 7],
-                    backgroundColor: [
-                        '#22c55e',
-                        '#facc15',
-                        '#ef4444'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right'
+        if (pieCtx) {
+            new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['male', 'female', 'other'],
+                    datasets: [{
+                        data: [<?= $male ?>, <?= $female ?>, <?= $other ?>],
+                        backgroundColor: [
+                            '#117ad6',
+                            '#d60e9d',
+                            '#a7e5ce'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     </script>
 </body>
 

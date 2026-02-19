@@ -13,12 +13,13 @@ function get(): void{}
 
 function post(): void
 {
-    session_start();
-
     $name = $_POST['name'] ?? null;
-    $date = $_POST['date'] ?? null;
+    $start_date = $_POST['start_date'] ?? null;
+    $end_date = $_POST['end_date'] ?? null;
+
     $location = $_POST['locetion'] ?? null;
     $description = $_POST['description'] ?? null;
+
     $max = $_POST['max'] ?? null;
     $user_id = $_SESSION['user']['user_id'] ?? null;
     $image_path = null;
@@ -39,10 +40,9 @@ function post(): void
         }
     }
 
-    $result = addevent($user_id, $name, $date, $location, $description, $max, $image_path);
-
+    $result = addevent($user_id, $name, $start_date, $end_date, $location, $description, $max, $image_path);
     if ($result) {
-        header("Location: /activities");
+        header("Location: /Event");
         exit;
     } else {
         return ;
