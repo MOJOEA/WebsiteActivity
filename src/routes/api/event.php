@@ -9,6 +9,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 }
 
+function get(): void{}
+
 function post(): void
 {
     $user_id = $_SESSION['user']['user_id'] ?? null;
@@ -22,7 +24,7 @@ function post(): void
 
 
     if ($result) {
-        header("Location: " . $_SERVER['REQUEST_URI']);
+        header('Location: /Event');
         exit;
 
     } else {

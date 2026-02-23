@@ -11,7 +11,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 // ประมวลผลก่อนแสดงผลหน้า
 function get(): void
 {
-    renderView('register', ['title' => 'Register Page']);
+    renderView('/service/register', ['title' => 'Register Page']);
 }
 
 function post(): void
@@ -69,6 +69,6 @@ function post(): void
     } else {
         // การลงทะเบียนล้มเหลว
         $error = "เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองใหม่อีกครั้ง";
-        renderView('register', ['title' => 'Register Page', 'error' => $error]);
+        renderView('/service/register', ['title' => 'Register Page', 'error' => $error]);
     }
 }

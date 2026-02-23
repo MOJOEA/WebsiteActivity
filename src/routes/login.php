@@ -12,7 +12,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 function get(): void
 {
-    renderView('login', ['title' => 'Login Page']);
+    renderView('/service/login', ['title' => 'Login Page']);
 }
 
 function post(): void
@@ -25,10 +25,6 @@ function post(): void
         return;
     }
 
-    if (login($email) === false) {
-        renderView('login', ['title' => 'Login Page', 'error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง']);
-        return;
-    }
     $result = login($email);
     if ($result && $result['email'] === $email) {
         if (password_verify($password, $result['PASSWORD'])) {
@@ -44,7 +40,7 @@ function post(): void
             exit();
         } else {
             // รหัสผ่านไม่ถูกต้อง
-            renderView('login', ['title' => 'Login Page', 'error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง3']);
+            renderView('/service/login', ['title' => 'Login Page', 'error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง']);
             return;
         }
     }

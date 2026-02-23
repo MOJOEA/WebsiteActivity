@@ -1,9 +1,9 @@
 <!-- EDIT MODAL -->
 <div id="editModal"
   onclick="closeEditModal()"
-  class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+  class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 ">
 
-  <div class="bg-white w-full max-w-lg rounded-xl p-6 relative"
+  <div class="bg-white w-full max-w-lg rounded-xl p-6 relative overflow-y-auto h-[95%]"
     onclick="event.stopPropagation()">
 
     <!-- ปุ่มปิด -->
@@ -35,8 +35,17 @@
       <div>
         <label class="text-sm text-gray-500 ml-1">วัน/เวลา</label>
         <input type="datetime-local"
-          name="date"
+          name="start_date"
           id="editDate"
+          class="w-full border rounded-lg px-3 py-2"
+          required>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-500 ml-1">วัน/เวลา สิ้นสุด</label>
+        <input type="datetime-local"
+          name="end_date"
+          id="editEDate"
           class="w-full border rounded-lg px-3 py-2"
           required>
       </div>
@@ -96,7 +105,8 @@
 
       <!-- ปุ่มบันทึก -->
       <button
-        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
+        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+        onclick="return confirm('คุณต้องการแก้ไขข้อมูลกิจกรรมนี้หรือไม่?');">
         บันทึกการแก้ไข
       </button>
 
@@ -113,6 +123,7 @@ function openEditModal(eventObj) {
   document.getElementById('editId').value = eventObj.id;
   document.getElementById('editName').value = eventObj.title;
   document.getElementById('editDate').value = eventObj.event_date;
+  document.getElementById('editEDate').value = eventObj.end_date;
   document.getElementById('editLocation').value = eventObj.location;
   document.getElementById('editDescription').value = eventObj.description;
   document.getElementById('editMax').value = eventObj.max_participants;

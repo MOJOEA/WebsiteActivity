@@ -10,7 +10,6 @@
 <body class="flex bg-gray-100">
 
     <?php include __DIR__ . '/../partials/sidebar.php'; ?>
-
     <main class="flex-1 p-8">
         <h1 class="text-2xl font-bold mb-6">กิจกรรมทั้งหมด</h1>
 
@@ -94,8 +93,8 @@
     </main>
 
     <!-- include modal -->
-    <?php include __DIR__ . '../view/create-modal.php'; ?>
-    <?php include __DIR__ . '../view/view-modal.php'; ?>
+    <?php include __DIR__ . '../popup/create-popup.php'; ?>
+    <?php include __DIR__ . '../popup/view-popup.php'; ?>
 </body>
 
 </html>

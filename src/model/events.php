@@ -82,7 +82,7 @@ function updateEvent(string $event_id, string $name, string $date, string $end_d
     try {
         $sql = "UPDATE events SET title = ?, description = ?, location = ?, event_date = ?, end_date = ?, max_participants = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssiis", $name, $description, $location, $date, $end_date, $max, $event_id);
+        $stmt->bind_param("sssssis", $name, $description, $location, $date, $end_date, $max, $event_id);
         $stmt->execute();
         $stmt->close();
 

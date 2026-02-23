@@ -8,7 +8,7 @@
 </head>
 
 <body class="bg-gray-100 text-gray-800">
-     <?php include __DIR__ . '/../partials/header.php'; ?>
+     <?php include __DIR__ . '/../../partials/header.php'; ?>
 
     <!-- Main Container -->
     <div class="max-w-4xl mx-auto px-6 py-12">
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <?php include __DIR__ . '/../partials/footer.php'; ?>
+    <?php include __DIR__ . '/../../partials/footer.php'; ?>
 </body>
 
 </html>

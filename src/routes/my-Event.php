@@ -12,10 +12,6 @@ function get(): void
     $end_date = $_GET['end_date'] ?? null;
     $user_id = $_SESSION['user']['user_id'] ?? null;
 
-    if (!$user_id) {
-        header("Location: /login");
-        exit;
-    }
     $events = getevents($keyword, $start_date, $end_date, $user_id);
-    renderView('my-activities', ['title' => 'my-activities Page', 'events' => $events, 'user_id' => $user_id]);
+    renderView('my-Event', ['title' => 'my-activities Page', 'events' => $events, 'user_id' => $user_id]);
 }
