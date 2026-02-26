@@ -21,7 +21,7 @@ function get(): void{
 
     $users_s = getRegistrationsByEventId($event_id);
 
-    renderView('dashboard', ['title' => 'dashboard Page', 
+    renderView('/main/dashboard', ['title' => 'dashboard Page', 
     'Conut' => ['users' => $users, 'pending_status' => $pending_status, 'yes_status' => $yes_status, 'checkin' => $checkin],
     'data_age' => $data_age, 'data_gender' => $data_gender, 'users' => $users_s]);
 }

@@ -4,7 +4,8 @@ $nevs = [
     ['routes' => '/my-Event', 'title' => 'กิจกรรมของฉัน'],
     ['routes' => '/my-Event', 'title' => 'คำขอของฉัน'],
     ['routes' => '/login', 'title' => 'เข้าสู่ระบบ'],
-    ['routes' => '/register', 'title' => 'สมัครสมาชิก']
+    ['routes' => '/register', 'title' => 'สมัครสมาชิก'],
+    ['routes' => '/contact', 'title' => 'แจ้งปัญหา']
 ];
 ?>
 

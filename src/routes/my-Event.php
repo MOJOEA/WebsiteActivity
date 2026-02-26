@@ -13,5 +13,11 @@ function get(): void
     $user_id = $_SESSION['user']['user_id'] ?? null;
 
     $events = getevents($keyword, $start_date, $end_date, $user_id);
-    renderView('my-Event', ['title' => 'my-activities Page', 'events' => $events, 'user_id' => $user_id]);
+    foreach ($events as &$event) {
+        $event['current_participants'] = 
+            getCount_Status($event['id'], "pending");
+        $event['current_participants'] += 
+            getCount_Status($event['id'], "yes");
+    }
+    renderView('/main/my-Event', ['title' => 'my-activities Page', 'events' => $events, 'user_id' => $user_id]);
 }

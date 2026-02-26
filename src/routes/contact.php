@@ -12,7 +12,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 function get(): void{
     // ประมวลผลก่อนแสดงผลหน้า
-    renderView('contact', ['title' => 'Contact Us']);
+    renderView('/service/contact', ['title' => 'Contact Us']);
 }
 
 function post(): void{
@@ -23,5 +23,5 @@ function post(): void{
     // mask email
     $email = preg_replace('/(?<=.).(?=[^@]*?.@)/', '*', $email);
     // แสดงหน้าขอบคุณหลังส่งข้อความ
-    renderView('thank', ['name' => $name, 'email' => $email, 'message' => $message]);
+    renderView('/service/thank', ['name' => $name, 'email' => $email, 'message' => $message]);
 }

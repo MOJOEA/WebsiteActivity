@@ -265,3 +265,4 @@ function cancelRegistrations(string $user_id, string $event_id): bool
 
     return $success;
 }
+

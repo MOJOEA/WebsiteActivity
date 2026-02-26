@@ -1,4 +1,5 @@
 <?php
+
 function getevents(?string $keyword = null, ?string $start_date = null, ?string $end_date = null, ?string $id = null): array
 {
     global $conn;
@@ -32,19 +33,26 @@ function getevents(?string $keyword = null, ?string $start_date = null, ?string 
     }
 
     $stmt = $conn->prepare($sql);
-
     if (!empty($params)) {
         $stmt->bind_param($types, ...$params);
     }
     $stmt->execute();
     $result = $stmt->get_result();
     $events = $result->fetch_all(MYSQLI_ASSOC);
-
     $stmt->close();
     return $events;
 }
 
-
+function getEventById(int $event_id): ?array {
+    global $conn; // ต้องมี $pdo จาก config
+    $sql = "SELECT * FROM events WHERE id = ? LIMIT 1";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $event_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $events = $result->fetch_all(MYSQLI_ASSOC);
+    return $events[0] ?? null;
+}
 
 function addevent(string $user_id, string $name, string $date, string $end_date, string $location, string $description, int $max, ?string $image_path): bool
 {

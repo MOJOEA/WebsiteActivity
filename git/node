@@ -111,6 +111,7 @@ git push -u origin main
 git status
 git add .
 git commit -m "อธิบายสิ่งที่แก้"
+
 git push
 
 # GitHub จะอัปเดตทันที
